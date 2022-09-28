@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang='en' ng-app="myApp">
+  <head>
+    <title>Book Shopping Cart with Undo Redo Button</title>
+    <script src="../js/angular182.js"></script>
+    <script src="./hw3_part3Controller.js"></script>
+    <link rel="stylesheet" href="../css/hw3.css">
+  </head>
+
+  <body ng-controller="CartControler" ng-init="updateTotal()">
+    <table>
+      <caption><b>My Books</b></caption>
+      <thead>
+        <tr>
+            <th>Title</th>
+            <th>Qty</th>
+            <th>UnitPrice</th>
+            <th>$UnitPrice</th>
+            <th>Line Total</th>
+            <th>Total {{total | number : 2}}</th>
+        </tr>
+      </thead>
+      
+      <tbody ng-repeat="book in books">
+        <tr>
+            <td><input type="text" ng-model="book.title" ></input>
+            </td>
+
+            <td>
+                <input ng-model="book.qty"  size="2" class = rounded>
+            </td>
+
+            <td>
+                <input ng-model="book.price" size="6" class = rounded>
+            </td>
+            <td>
+                {{book.price | currency}}
+            </td>
+            <td>
+                {{book.price * book.qty | currency}}</td>
+            <td>
+                <button ng-click="removeBook($index)" >
+                    Remove
+                </button>
+            </td>
+        </tr>
+      </tbody>
+
+      
+      <thead>
+        <tr>
+            <th></th>
+            <th>
+                <button ng-click="addBook()">
+                    New
+                </button>
+            </th>
+
+            <th>
+                <button ng-click="undoBook()">
+                    Undo
+                </button>
+            </th>
+
+            <th>
+                <button ng-click="redoBook()">
+                    Redo
+                </button>
+            </th>
+            <th>
+                <button ng-click="saveBook()">
+                    Save
+                </button>
+            </th>
+            <th></th>
+        </tr>
+      </thead>
+    </table>
+  </body>
+</html>
